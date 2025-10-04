@@ -14,7 +14,7 @@ namespace ToDoList.Infrastructure.Repositories
     {
         private readonly IDataContext _dataContext = dataContext;
         private readonly ILogServices _logServices = logServices;
-        public async Task<ResponseDTO> CreateUser(UserDTO userDTO)
+        public async Task<ResponseDTO> CreateUser(CreateUserDTO userDTO)
         {
            
             try
@@ -115,7 +115,7 @@ namespace ToDoList.Infrastructure.Repositories
             }
         }
 
-        public async Task<ResponseDTO> UpdateUser(UserDTO userDTO)
+        public async Task<ResponseDTO> UpdateUser(UpdateUserDTO userDTO)
         {
             try
             {

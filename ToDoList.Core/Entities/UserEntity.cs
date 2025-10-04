@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDoList.Core.Entities
 {
+    [Table("Users")]
     public class UserEntity
     {
         [Key]
