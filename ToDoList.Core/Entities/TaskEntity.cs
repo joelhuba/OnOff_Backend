@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDoList.Core.Entities
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    namespace ToDoList.Core.Entities
     {
         [Table("Tasks")]
         public class TaskEntity
@@ -36,5 +31,3 @@ namespace ToDoList.Core.Entities
             public UserEntity User { get; set; } = null!;
         }
     }
-
-}

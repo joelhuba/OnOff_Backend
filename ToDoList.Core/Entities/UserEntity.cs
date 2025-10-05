@@ -29,5 +29,8 @@ namespace ToDoList.Core.Entities
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+        [Required]
+        [MaxLength(20)]
+        public string Rol { get; set; }
     }
 }

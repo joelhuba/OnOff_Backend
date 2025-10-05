@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using ToDoList.Core.Entities;
 
 namespace ToDoList.Core.Interfaces.Repositories.DataContext

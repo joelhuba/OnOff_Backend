@@ -9,6 +9,6 @@ namespace ToDoList.Core.Interfaces.Repositories
         Task<ResponseDTO> UpdateTask(UpdateTaskDTO taskDTO);
         Task<ResponseDTO> DeleteTask(int idTask);
         Task<ResponseDTO> GetTaskById(int idTask);
-        Task<ResponseDTO> GetAllTasks(PaginatorDTO paginator, int? idUser = null, bool? isCompleted = null);
+        Task<ResponseDTO> GetAllTasks(PaginatorDTO paginator, int idUser, bool? isCompleted = null);
     }
 }

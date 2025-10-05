@@ -24,6 +24,7 @@ namespace ToDoList.Infrastructure.Repositories
                     Email = userDTO.Email,
                     Password = userDTO.Password,
                     PasswordSalt = userDTO.PasswordSalt,
+                    Rol = userDTO.Rol,
                     FirstName = userDTO.FirstName,
                     LastName = userDTO.LastName
                 };
@@ -75,7 +76,15 @@ namespace ToDoList.Infrastructure.Repositories
                 var users = await query
                     .Skip((paginatorDTO.PageIndex - 1) * paginatorDTO.PageSize)
                     .Take(paginatorDTO.PageSize)
-                    .ToListAsync();
+                    .Select(u => new UserDTO
+                     {
+                        IdUser = u.IdUser,
+                        Email = u.Email,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                        Rol = u.Rol
+                    })
+        .ToListAsync();
 
                 return new ResponseDTO
                 {
@@ -95,7 +104,17 @@ namespace ToDoList.Infrastructure.Repositories
         {
             try
             {
-                var user = await _dataContext.Users.FindAsync(idUser);
+                var user = await _dataContext.Users
+                .Where(u => u.IdUser == idUser)
+                .Select(u => new UserDTO
+                    {
+                     IdUser = u.IdUser,
+                    Email = u.Email,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+
+                })
+                .FirstOrDefaultAsync();
                 return user is null
                     ? new ResponseDTO
                     { 
@@ -126,6 +145,7 @@ namespace ToDoList.Infrastructure.Repositories
                 user.FirstName = userDTO.FirstName;
                 user.LastName = userDTO.LastName;
                 user.Email = userDTO.Email;
+                user.Rol = userDTO.Rol;
 
                 _dataContext.Users.Update(user);
                 await _dataContext.SaveChangesAsync();

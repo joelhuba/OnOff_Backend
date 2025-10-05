@@ -97,15 +97,16 @@ namespace ToDoList.Infrastructure.Repositories
             }
         }
 
-        public async Task<ResponseDTO> GetAllTasks(PaginatorDTO paginator, int? idUser = null, bool? isCompleted = null)
+        public async Task<ResponseDTO> GetAllTasks(PaginatorDTO paginator, int idUser, bool? isCompleted = null)
         {
             try
             {
                 var query = _dataContext.Tasks.AsQueryable();
 
-                if (idUser.HasValue)
-                    query = query.Where(t => t.IdUser == idUser.Value);
+                // Filtrar por usuario obligatorio
+                query = query.Where(t => t.IdUser == idUser);
 
+                // Filtrar por estado si se proporciona
                 if (isCompleted.HasValue)
                     query = query.Where(t => t.IsCompleted == isCompleted.Value);
 
@@ -117,7 +118,12 @@ namespace ToDoList.Infrastructure.Repositories
                     .Take(paginator.PageSize)
                     .ToListAsync();
 
-                return new ResponseDTO{ IsSuccess = true, Message = "Tareas obtenidas correctamente", Data = null };
+                return new ResponseDTO
+                {
+                    IsSuccess = true,
+                    Message = "Tareas obtenidas correctamente",
+                    Data = tasks
+                };
             }
             catch (Exception ex)
             {
